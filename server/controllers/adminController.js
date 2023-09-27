@@ -1,56 +1,65 @@
 const Admin = require("../models/Admin");
 
-
 class AdminController {
-    async findOne(req, res) {
-        let { emailAddress } = req.params;
+  async createOne(req, res) {
+    let { emailAddress, password } = req.body;
 
-        try {
-          const admin = await Admin.AdminModel.findOne({ emailAddress: emailAddress });
-          res.send({ok: true, data: admin});
-        } catch (error) {
-          res.send(error);
-        }
+    let newAdmin = { emailAddress, password };
+    console.log(newAdmin);
 
-
+    try {
+      const admin = await Admin.create(newAdmin);
+      res.send({ ok: true, data: admin });
+    } catch (error) {
+      res.send(error.message);
     }
+  }
+  async findOne(req, res) {
+    let { _id } = req.body;
 
-    async findAll(req, res) {
-        try {
-          const admins = await Admin.find({});
-          res.send(admins);
-        } catch (error) {
-          res.send(error);
-        }
-      }
-
-     async findOneAndDelete(req, res) {
-        let { emailAddress } = req.params;
-
-        try {
-          const admin = await Admin.findOneAndDelete({ emailAdress: emailAddress });
-          res.send('admin deleted');
-        } catch (error) {
-          res.send(error);
-        }
+    try {
+      const admin = await Admin.findOne({
+        _id: _id,
+      });
+      res.send({ ok: true, data: admin });
+    } catch (error) {
+      res.send(error);
     }
+  }
 
-    async findOneAndUpdate(req, res) {
-        let { emailAddress } = req.params;
+  async findAll(req, res) {
+    try {
+      const admins = await Admin.find({});
+      res.send(admins);
+    } catch (error) {
+      res.send(error);
+    }
+  }
 
-        try {
-          const admin = await Admin.findOneAndUpdate({ emailAddress: emailAddress });
-          res.send({ok: true, data: 'updated'});
-        } catch (error) {
-          res.send(error);
-        }
-      }
+  async findOneAndDelete(req, res) {
+    let { _id } = req.body;
 
+    try {
+      const admin = await Admin.findOneAndDelete({
+        _id: _id,
+      });
+      res.send(admin);
+    } catch (error) {
+      res.send(error);
+    }
+  }
 
+  async findOneAndUpdate(req, res) {
+    let { _id, updatedAdmin } = req.body;
+    console.log(updatedAdmin);
+    try {
+      const admin = await Admin.findOneAndUpdate({ _id: _id }, updatedAdmin);
 
-
-
-
+      res.send({ ok: true, data: admin });
+    } catch (error) {
+      res.send(error);
+    }
+  }
 }
 
 module.exports = new AdminController();

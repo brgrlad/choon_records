@@ -3,10 +3,9 @@ const Schema = mongoose.Schema
 
 const AdminSchema = new Schema(
   {
-    emailAdress: { type: String, required: true },
+    emailAddress: { type: String, required: true, unique:true },
     password: { type: String, required: true }
-  },
-  { versionKey: false}
+  }
 );
 
 module.exports = mongoose.model("AdminModel", AdminSchema);

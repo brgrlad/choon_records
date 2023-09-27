@@ -5,7 +5,7 @@ class ProductController {
 
   //FIND A SINGLE USER
   async findOne(req, res) {
-    let { _id } = req.params;
+    let { _id } = req.body;
 
     try {
       const product = await Product.findOne({ _id: _id });
@@ -27,11 +27,11 @@ class ProductController {
 
   //FIND AND DELETE USER
   async findOneAndDelete(req, res) {
-    let { _id } = req.params;
+    let { _id } = req.body;
 
     try {
-      const product = await Product.findOneAndDelete({ _id: _id });
-      res.send({ok: true, data: 'user deleted'});
+      const product = await Product.findOneAndDelete({ _id: _id});
+      res.send({ok: true, data: product});
     } catch (error) {
       res.send(error);
     }
@@ -39,8 +39,9 @@ class ProductController {
 
   //FIND AND UPDATE USER
   async findOneAndUpdate(req, res) {
-    let { _id, updatedProduct } = req.params;
 
+    let { _id, updatedProduct } = req.body;
+console.log(updatedProduct);
     try {
       const product = await Product.findOneAndUpdate({ _id: _id },updatedProduct);
       res.send({ok: true, data: product});
@@ -49,9 +50,9 @@ class ProductController {
     }
   }
 
-
+  //CREATE NEW PRODUCT
   async createProduct(req, res) {
-    let { artist, title, releaseDate, label, price, picture } = req.body;
+    let { artist, title, releaseDate, label, price, genres } = req.body;
 
     let newProduct = {
         artist,
@@ -59,16 +60,20 @@ class ProductController {
         releaseDate,
         label,
         price,
-        picture,
+        genres
+
     }
 
     try {
       const product = await Product.create(newProduct);
-      res.send({ok: true, data: newProduct });
+      res.send({ok: true, data: product });
     } catch (error) {
       res.send(error);
     }
   }
 }
 
+
+
 module.exports = new ProductController();
+

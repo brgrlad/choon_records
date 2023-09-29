@@ -15,11 +15,13 @@ class ProductController {
     }
   }
 
-  //FIND ALL USERS
+  //FIND ALL PRODUCTS
   async findAll(req, res) {
     try {
       const products = await Product.find({});
-      res.send(products);
+
+      res.send({ok: true, data: products});
+
     } catch (error) {
       res.send(error);
     }

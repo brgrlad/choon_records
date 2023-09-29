@@ -1,6 +1,8 @@
 const Admin = require("../models/Admin");
 
 class AdminController {
+
+  //CREATE ADMIN
   async createOne(req, res) {
     let { emailAddress, password } = req.body;
 
@@ -14,19 +16,32 @@ class AdminController {
       res.send(error.message);
     }
   }
+
+  //LOGIN ADMIN
   async findOne(req, res) {
-    let { _id } = req.body;
+
+    let { emailAddress, password} = req.params
 
     try {
       const admin = await Admin.findOne({
-        _id: _id,
+        emailAddress,
+        password
       });
-      res.send({ ok: true, data: admin });
+
+      if(admin) {
+        res.send({ ok: true, data: admin })
+
+      } else {
+        res.send({ ok: false, data: 'credentials not valid' })
+
+      }
+
     } catch (error) {
       res.send(error);
     }
   }
 
+  //LIST ALL ADMINS
   async findAll(req, res) {
     try {
       const admins = await Admin.find({});
@@ -36,6 +51,7 @@ class AdminController {
     }
   }
 
+  //DELETE ADMIN
   async findOneAndDelete(req, res) {
     let { _id } = req.body;
 
@@ -49,6 +65,7 @@ class AdminController {
     }
   }
 
+  //UPDATE ADMIN
   async findOneAndUpdate(req, res) {
     let { _id, updatedAdmin } = req.body;
     console.log(updatedAdmin);

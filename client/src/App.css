@@ -1,0 +1,131 @@
+body{
+    width: 100vw;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.bodyWrapper{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+
+}
+
+a{
+    margin: 5px 10px;
+}
+
+.navbar{
+
+    width: 100%;
+    text-align: right;
+    margin: 10px;
+}
+
+header{
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.133);
+    height: 190px;
+    text-align: center;
+
+}
+
+footer{
+    height: 200px;
+    border: 2px solid black;
+    width: 100%;
+}
+
+img{
+    width: 100%;
+    ;
+}
+
+h3{
+    line-height: 5px;
+}
+
+.productsWrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+
+
+}
+
+.productCard{
+    width: 250px;
+    border: 2px solid rgb(0, 0, 0);
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.888);
+    color: white;
+
+}
+
+.productsNavbar{
+    height: 50px;
+
+    display: flex;
+
+
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+
+}
+
+.productsNavbar a{
+    text-decoration: none;
+}
+
+.adminPageWrapper {
+
+    width: 100%;
+
+    border: 1px solid red;
+}
+
+#addProduct{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+#addProduct input{
+    height: 30px;
+    margin: 5px;
+}
+
+.inline{
+    display: block;
+}
+
+.registerUserWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+
+
+
+}
+
+.registerUserWrapper input {
+    width: 250px;
+    margin: 5px;
+}
+
+.newsletter{
+    height: 400px;
+    color: white;
+    background-color: black;
+    width: 100%;
+}

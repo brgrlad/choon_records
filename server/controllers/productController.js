@@ -54,7 +54,7 @@ console.log(updatedProduct);
 
   //CREATE NEW PRODUCT
   async createProduct(req, res) {
-    let { artist, title, releaseDate, label, price, genres } = req.body;
+    let { artist, title, releaseDate, label, price, genres, instock } = req.body;
 
     let newProduct = {
         artist,
@@ -62,7 +62,8 @@ console.log(updatedProduct);
         releaseDate,
         label,
         price,
-        genres
+        genres,
+        instock
 
     }
 
@@ -70,7 +71,7 @@ console.log(updatedProduct);
       const product = await Product.create(newProduct);
       res.send({ok: true, data: product });
     } catch (error) {
-      res.send(error);
+      res.send({ok: false, data: error});
     }
   }
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import ProductCard from "../components/ProductCard";
+
 
 function Products() {
 
@@ -34,20 +36,15 @@ function Products() {
 
 
     return (
-        <>
+        <div className="productsWrapper">
 
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
 
-
-        <h1>Tite</h1>
-
-        {/* PRODUCT CARD */}
-
-
-
-
-
-
-        </>
+        </div>
 
 
 

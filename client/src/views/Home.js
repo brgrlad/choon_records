@@ -1,11 +1,19 @@
+import Products from "./Products";
+
 
 
 function Home() {
+
   return (
 
     <>
 
-    <h1> hello from Home</h1>
+    <h1> JUST IN! </h1>
+
+    <Products />
+
+
+
 
 
     </>

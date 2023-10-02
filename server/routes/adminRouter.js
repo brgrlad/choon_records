@@ -9,7 +9,7 @@ const adminController = require('../controllers/adminController')
 router.post('/createAdmin', adminController.createOne)
 
 //working
-router.get('/getOneAdmin', adminController.findOne)
+router.post('/loginAdmin', adminController.loginAdmin)
 
 //working
 router.get('/getAllAdmin', adminController.findAll)
@@ -19,6 +19,8 @@ router.delete('/deleteAdmin', adminController.findOneAndDelete)
 
 //working
 router.post('/updateAdmin', adminController.findOneAndUpdate)
+
+
 
 
 module.exports = router;

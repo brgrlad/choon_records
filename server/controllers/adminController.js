@@ -1,45 +1,102 @@
 const Admin = require("../models/Admin");
 
+//HASH THE PASSWORD
+const argon2 = require("argon2");
+
+//VERIFY AND PROVIDE TOKEN
+const jwt = require("jsonwebtoken");
+const jwt_secret = "abc";
+
 class AdminController {
+
 
   //CREATE ADMIN
   async createOne(req, res) {
     let { emailAddress, password } = req.body;
 
-    let newAdmin = { emailAddress, password };
-    console.log(newAdmin);
+    if (!emailAddress || !password) {
+      res.send({ ok: false, message: "Please provide the credentials" });
+    }
 
     try {
-      const admin = await Admin.create(newAdmin);
-      res.send({ ok: true, data: admin });
+      const user = await Admin.findOne({ emailAddress });
+
+      if (user) {
+        return res.send({
+          ok: false,
+          message: "E-mail address already registered in the database.",
+        });
+      }
+
+      const hash = await argon2.hash(password);
+
+      let newAdmin = {
+        emailAddress,
+        password: hash,
+      };
+
+      await Admin.create(newAdmin);
+      res.send({ ok: true, message: `Successfully registered` });
     } catch (error) {
-      res.send(error.message);
+      console.log(error);
+      res.send({ ok: false, error });
     }
   }
 
   //LOGIN ADMIN
-  async findOne(req, res) {
+  async loginAdmin(req, res) {
+    let { emailAddress, password } = req.body;
 
-    let { emailAddress, password} = req.params
+    if (!emailAddress || !password) {
+      res.send({
+        ok: false,
+        message: "Please provide password and e-mail credentials.",
+      });
+    }
 
     try {
-      const admin = await Admin.findOne({
-        emailAddress,
-        password
-      });
+      const admin = await Admin.findOne({ emailAddress });
 
-      if(admin) {
-        res.send({ ok: true, data: admin })
+      if (admin) {
+        const match = await argon2.verify(admin.password, password);
 
+        if (match) {
+          const token = jwt.sign({ emailAddress: emailAddress }, jwt_secret, {
+            expiresIn: "1h",
+          });
+
+          res.json({
+            ok: true,
+            message: "You're logged in!",
+            token,
+            emailAddress,
+          });
+
+          // ADD ELSE CLAUSE TO MAKE SURE THE REQUEST WON'T GET STUCK IN SENDING MODE
+        } else {
+          res.json({ ok: false, message: "wrong password" });
+        }
       } else {
-        res.send({ ok: false, data: 'credentials not valid' })
-
+        return res.json({ ok: false, message: "Invalid credentials." });
       }
-
     } catch (error) {
-      res.send(error);
+      console.log(error);
+      res.json({ ok: false, error });
     }
   }
+
+  //TOKEN VERIFYER
+  verify_token = (req, res) => {
+    console.log(req.headers.authorization);
+
+    const token = req.headers.authorization;
+    jwt.verify(token, jwt_secret, (err, succ) => {
+      err
+        ? res.json({ ok: false, message: "Token is corrupted" })
+        : res.json({ ok: true, succ });
+    });
+  };
+
 
   //LIST ALL ADMINS
   async findAll(req, res) {

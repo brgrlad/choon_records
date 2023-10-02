@@ -58,8 +58,11 @@ h3{
 
 }
 
+.homeWrapper{
+    text-align: left;
+}
 .productCard{
-    width: 250px;
+    width: 200px;
     border: 2px solid rgb(0, 0, 0);
     margin: 20px;
     background-color: rgba(0, 0, 0, 0.888);
@@ -67,10 +70,19 @@ h3{
 
 }
 
-.productsNavbar{
-    height: 50px;
+.loginAdmin{
 
     display: flex;
+
+    margin: 50px 0;
+
+}
+
+.productsNavbar{
+    height: 50px;
+    text-align: center;
+
+
 
 
     width: 100%;

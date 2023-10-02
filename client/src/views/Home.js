@@ -6,17 +6,19 @@ function Home() {
 
   return (
 
-    <>
+    <div className="homeWrapper">
 
-    <h1> JUST IN! </h1>
+    <h1> JUST IN! \/ </h1>
 
     <Products />
 
+    </div>
 
 
 
 
-    </>
+
+
   );
 }
 

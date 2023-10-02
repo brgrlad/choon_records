@@ -34,19 +34,13 @@ function App() {
 
         <ProductsNavbar />
 
-
-
-
-
-
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/User/Register" element={<RegisterUser />} />
           <Route path="/User/Login" element={<UserLogin />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/loginAdmin" element={<AdminLogin />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/admin/adminPage" element={<AdminPage />} />
 

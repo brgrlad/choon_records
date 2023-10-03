@@ -11,6 +11,8 @@ router.post('/createAdmin', adminController.createOne)
 //working
 router.post('/loginAdmin', adminController.loginAdmin)
 
+router.get('/loginAdmin', adminController.loginAdmin)
+
 //working
 router.get('/getAllAdmin', adminController.findAll)
 

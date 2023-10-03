@@ -42,6 +42,8 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/admin/loginAdmin" element={<AdminLogin />} />
           <Route path="/Contact" element={<Contact />} />
+
+          {/* if logged in, show adminPage */}
           <Route path="/admin/adminPage" element={<AdminPage />} />
 
         </Routes>

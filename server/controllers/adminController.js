@@ -8,8 +8,6 @@ const jwt = require("jsonwebtoken");
 const jwt_secret = "abc";
 
 class AdminController {
-
-
   //CREATE ADMIN
   async createOne(req, res) {
     let { emailAddress, password } = req.body;
@@ -43,18 +41,18 @@ class AdminController {
     }
   }
 
-  //LOGIN ADMIN
   async loginAdmin(req, res) {
     let { emailAddress, password } = req.body;
 
     if (!emailAddress || !password) {
       res.send({
         ok: false,
-        message: "Please provide password and e-mail credentials.",
+        message: "E-mail and password must be provided.",
       });
     }
 
     try {
+
       const admin = await Admin.findOne({ emailAddress });
 
       if (admin) {
@@ -71,13 +69,11 @@ class AdminController {
             token,
             emailAddress,
           });
-
-          // ADD ELSE CLAUSE TO MAKE SURE THE REQUEST WON'T GET STUCK IN SENDING MODE
         } else {
-          res.json({ ok: false, message: "wrong password" });
+          res.json({ ok: false, message: "Wrong credentials" });
         }
       } else {
-        return res.json({ ok: false, message: "Invalid credentials." });
+        res.json({ ok: false, message: "Wrong credentials" });
       }
     } catch (error) {
       console.log(error);
@@ -96,7 +92,6 @@ class AdminController {
         : res.json({ ok: true, succ });
     });
   };
-
 
   //LIST ALL ADMINS
   async findAll(req, res) {

@@ -19,6 +19,7 @@ function AdminLogin({ login }) {
 
   //SUBMIT HANDLER
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     let adminInput = { emailAddress: emailInput, password: passwordInput };
@@ -30,6 +31,8 @@ function AdminLogin({ login }) {
       console.log(response);
 
       if (response.data.token) {
+
+
         login(response.data.token, response.data.admin);
         navigate("/admin/adminPage");
       } else {

@@ -3,8 +3,9 @@ import axios from "axios";
 import * as jose from "jose";
 import { useNavigate } from "react-router-dom";
 
-function UserLogin() {
-  // const navigate = useNavigate();
+function UserLogin({login}) {
+
+  const navigate = useNavigate();
 
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -26,11 +27,11 @@ function UserLogin() {
 
     try {
       const response = await axios.post(URL, userInput);
-      console.log(response);
 
       if (response.data.token) {
-        // login(response.data.token, response.data.user);
-        // navigate("/");
+
+        login(response.data.token, response.data.user);
+        navigate("/");
       } else {
         console.log("wrong credentials");
       }

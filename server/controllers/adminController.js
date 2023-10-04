@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const jwt_secret = "abc";
 
 class AdminController {
+
   //CREATE ADMIN
   async createOne(req, res) {
     let { emailAddress, password } = req.body;
@@ -31,6 +32,7 @@ class AdminController {
       let newAdmin = {
         emailAddress,
         password: hash,
+        isAdmin: true
       };
 
       await Admin.create(newAdmin);
@@ -67,7 +69,6 @@ class AdminController {
             message: "You're logged in.",
             token,
             emailAddress,
-            // CH-CH-CH-CHANGESSSSSSS
             admin,
           });
         } else {

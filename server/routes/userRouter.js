@@ -25,6 +25,9 @@ router.get('/login', userController.loginUser)
 //LOGIN USER - POST
 router.post('/login', userController.loginUser)
 
+//VERIFY TOKEN
+router.post('/verify_token', userController.verify_token)
+
 
 
 module.exports = router;

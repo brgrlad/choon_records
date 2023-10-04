@@ -15,10 +15,13 @@ function RegisterUser() {
   const handleInput = (e, inputState) => {
     e.preventDefault();
     inputState(e.target.value);
+
   };
 
   //SUBMIT HANDLER/API CALL
   const handleSubmit = async (e) => {
+    console.log('handle submit')
+
     e.preventDefault()
 
     let newUser =
@@ -31,12 +34,15 @@ function RegisterUser() {
       birthDate
     }
 
+    console.log(newUser)
+
 
     const URL = "http://localhost:4004/user/register";
 
     try {
-      const resonse = await axios.post(URL, newUser)
-      console.log('user created!')
+      const response = await axios.post(URL, newUser)
+      console.log(response)
+
     } catch (error) {
       console.log(error)
     }
@@ -50,15 +56,15 @@ function RegisterUser() {
 
       <h1> Create an account!</h1>
 
-      <form id="createUser">
+      <form onSubmit={handleSubmit} id="createUser">
 
-      <input type="name" onChange ={(e) => handleInput(e, setName)} id="name" placeholder="First Name"/>
+      <input type="text" onChange ={(e) => handleInput(e, setName)} id="name" placeholder="First Name"/>
       <input type="text" onChange ={(e) => handleInput(e, setSurname)} id="surname" placeholder="Surname"/>
       <input type="email" onChange ={(e) => handleInput(e, setEmailAddress)} id="email" placeholder="E-mail Address"/>
       <input type="password" onChange ={(e) => handleInput(e, setPassword)} id="password" placeholder="Password"/>
       <input type="text" onChange ={(e) => handleInput(e, setAddress)} id="address" placeholder="Address"/>
       <input type="date" onChange ={(e) => handleInput(e, setBirthDate)} id="birthDate" placeholder="Birth Date"/>
-      <button type="submit"> Register! </button>
+      <button type="submit"> Register!</button>
 
       </form>
 

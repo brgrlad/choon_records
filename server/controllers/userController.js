@@ -2,8 +2,24 @@ const User = require("../models/User");
 
 const argon2 = require("argon2");
 
-class UserController {
+const jwt = require("jsonwebtoken");
+const jwt_secret = "abc";
 
+class UserController {
+    //FIND USER
+    async findOne(req, res) {
+      let { _id } = req.body;
+
+      try {
+        const user = await User.findOne({ _id: _id });
+        res.send({ ok: true, data: user });
+      } catch (error) {
+        res.send(error);
+      }
+    }
+
+
+  //CREATE USER
   async createUser(req, res) {
 
     let { name, surname, emailAddress, password, address, birthDate } =
@@ -17,30 +33,37 @@ class UserController {
       emailAddress,
       password: hash,
       address,
-      birthDate
+      birthDate,
+      isAdmin: false
     };
 
     try {
-      const user = await User.create(newUser);
+
+
+      const findUser = await User.findOne({ emailAddress });
+
+
+      if(findUser) {
+       res.send({
+          ok: false,
+          message: "E-mail address already registered in the database.",
+        });
+
+      }
+
+      await User.create(newUser);
+      console.log('user created')
       res.send({ ok: true, data: newUser });
+
     } catch (error) {
       res.send(error);
     }
   }
 
-  //FIND USER
-  async findOne(req, res) {
-    let { _id } = req.body;
 
-    try {
-      const user = await User.findOne({ _id: _id });
-      res.send({ ok: true, data: user });
-    } catch (error) {
-      res.send(error);
-    }
-  }
 
-  //________________________LOGIN USER _________________________________
+
+  //LOGIN USER
 
   async loginUser(req, res) {
     let { emailAddress, password } = req.body;
@@ -68,7 +91,6 @@ class UserController {
             message: "You're logged in.",
             token,
             emailAddress,
-            // user????
             user,
           });
         } else {
@@ -83,7 +105,19 @@ class UserController {
     }
   }
 
-  //--------------------END LOGIN USER----------------------------
+
+
+
+  //TOKEN VERIFYER
+  verify_token = (req, res) => {
+
+    const token = req.headers.authorization;
+    jwt.verify(token, jwt_secret, (err, succ) => {
+      err
+        ? res.json({ ok: false, message: "Token is corrupted" })
+        : res.json({ ok: true, succ });
+    });
+  };
 
   async findAll(req, res) {
     try {

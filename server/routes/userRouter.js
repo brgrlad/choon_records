@@ -4,8 +4,8 @@ const userController = require('../controllers/userController')
 
 //USERS
 
-//working
-router.post('/createUser', userController.createUser)
+//CREATE NEW USER
+router.post('/register', userController.createUser)
 
 //working
 router.get('/findUser', userController.findOne)
@@ -18,6 +18,12 @@ router.delete('/deleteUser', userController.findOneAndDelete)
 
 //working
 router.post('/updateUser', userController.findOneAndUpdate)
+
+//LOGIN USER - GET
+router.get('/login', userController.loginUser)
+
+//LOGIN USER - POST
+router.post('/login', userController.loginUser)
 
 
 

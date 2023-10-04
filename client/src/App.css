@@ -78,6 +78,11 @@ h3{
 
 }
 
+#createUser{
+    display: flex;
+    flex-direction: column;
+}
+
 .productsNavbar{
     height: 50px;
     text-align: center;

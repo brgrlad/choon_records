@@ -3,37 +3,35 @@ import axios from "axios";
 import * as jose from "jose";
 import { useNavigate } from "react-router-dom";
 
-function AdminLogin({login}) {
-const navigate = useNavigate()
+// login() is being passed via Route
+function AdminLogin({ login }) {
+
+  const navigate = useNavigate();
 
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-
-
-
-  //UPDATE STATE FOR EMAIL AND PASSWORD
+  //UPDATE STATE FOR EMAIL AND PASSWORD INPUTS
   const handleInput = (e, inputState) => {
     e.preventDefault();
     inputState(e.target.value);
   };
 
-  //LOGIN AFTER VERYFYING USER IN DB WITH loginAdmin()
+  //SUBMIT HANDLER
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //OK
     let adminInput = { emailAddress: emailInput, password: passwordInput };
 
-    const URL = "http://localhost:4004/admin/loginAdmin";
+    const URL = "http://localhost:4004/admin/login";
 
     try {
       const response = await axios.post(URL, adminInput);
       console.log(response);
 
       if (response.data.token) {
-        login(response.data.token);
-        navigate('/admin/adminPage')
+        login(response.data.token, response.data.admin);
+        navigate("/admin/adminPage");
       } else {
         console.log("wrong credentials");
       }
@@ -41,8 +39,6 @@ const navigate = useNavigate()
       console.error("Error:", error.message);
     }
   };
-
-
 
   return (
     <>
@@ -61,16 +57,9 @@ const navigate = useNavigate()
         ></input>
 
         <button type="submit">submit</button>
-
       </form>
-
-
     </>
   );
 }
 
 export default AdminLogin;
-
-
-//  <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
-

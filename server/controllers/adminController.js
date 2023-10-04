@@ -52,7 +52,6 @@ class AdminController {
     }
 
     try {
-
       const admin = await Admin.findOne({ emailAddress });
 
       if (admin) {
@@ -65,9 +64,11 @@ class AdminController {
 
           res.json({
             ok: true,
-            message: "You're logged in!",
+            message: "You're logged in.",
             token,
             emailAddress,
+            // CH-CH-CH-CHANGESSSSSSS
+            admin,
           });
         } else {
           res.json({ ok: false, message: "Wrong credentials" });
@@ -76,14 +77,14 @@ class AdminController {
         res.json({ ok: false, message: "Wrong credentials" });
       }
     } catch (error) {
-      console.log(error);
+
       res.json({ ok: false, error });
     }
   }
 
   //TOKEN VERIFYER
   verify_token = (req, res) => {
-    console.log(req.headers.authorization);
+
     const token = req.headers.authorization;
     jwt.verify(token, jwt_secret, (err, succ) => {
       err
@@ -119,7 +120,7 @@ class AdminController {
   //UPDATE ADMIN
   async findOneAndUpdate(req, res) {
     let { _id, updatedAdmin } = req.body;
-    console.log(updatedAdmin);
+
     try {
       const admin = await Admin.findOneAndUpdate({ _id: _id }, updatedAdmin);
 

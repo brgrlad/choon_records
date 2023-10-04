@@ -1,28 +1,34 @@
 const User = require("../models/User");
 
+const argon2 = require("argon2");
+
 class UserController {
+
   async createUser(req, res) {
-    let { emailAddress, password, name, surname, address, birth, newsletter } =
+
+    let { name, surname, emailAddress, password, address, birthDate } =
       req.body;
 
+    const hash = await argon2.hash(password);
+
     let newUser = {
-      emailAddress,
-      password,
       name,
       surname,
+      emailAddress,
+      password: hash,
       address,
-      birth,
-      newsletter,
+      birthDate
     };
 
     try {
       const user = await User.create(newUser);
-      res.sed({ ok: true, data: newUser });
+      res.send({ ok: true, data: newUser });
     } catch (error) {
       res.send(error);
     }
   }
 
+  //FIND USER
   async findOne(req, res) {
     let { _id } = req.body;
 
@@ -33,6 +39,51 @@ class UserController {
       res.send(error);
     }
   }
+
+  //________________________LOGIN USER _________________________________
+
+  async loginUser(req, res) {
+    let { emailAddress, password } = req.body;
+
+    if (!emailAddress || !password) {
+      res.send({
+        ok: false,
+        message: "E-mail and password must be provided.",
+      });
+    }
+
+    try {
+      const user = await User.findOne({ emailAddress });
+
+      if (user) {
+        const match = await argon2.verify(user.password, password);
+
+        if (match) {
+          const token = jwt.sign({ emailAddress: emailAddress }, jwt_secret, {
+            expiresIn: "1h",
+          });
+
+          res.json({
+            ok: true,
+            message: "You're logged in.",
+            token,
+            emailAddress,
+            // user????
+            user,
+          });
+        } else {
+          res.json({ ok: false, message: "Wrong credentials" });
+        }
+      } else {
+        res.json({ ok: false, message: "Wrong credentials" });
+      }
+    } catch (error) {
+
+      res.json({ ok: false, error });
+    }
+  }
+
+  //--------------------END LOGIN USER----------------------------
 
   async findAll(req, res) {
     try {

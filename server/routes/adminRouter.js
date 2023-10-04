@@ -3,26 +3,25 @@ router = express.Router()
 
 const adminController = require('../controllers/adminController')
 
-//ADMIN
-
-//working
+//CREATE ADMIN
 router.post('/createAdmin', adminController.createOne)
 
-//working
-router.post('/loginAdmin', adminController.loginAdmin)
+//LOGIN ADMIN - GET
+router.get('/login', adminController.loginAdmin)
 
-router.get('/loginAdmin', adminController.loginAdmin)
+//LOGIN ADMIN - POST
+router.post('/login', adminController.loginAdmin)
 
-//working
+//VERIFY TOKEN
+router.post('/verify_token', adminController.verify_token)
+
+//GET ALL ADMINS
 router.get('/getAllAdmin', adminController.findAll)
 
-//working
+//DELETE ADMIN
 router.delete('/deleteAdmin', adminController.findOneAndDelete)
 
-//working
+//UPDATE ADMIN
 router.post('/updateAdmin', adminController.findOneAndUpdate)
-
-
-
 
 module.exports = router;

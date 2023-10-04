@@ -1,9 +1,10 @@
 import "./App.css";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink, Navigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as jose from "jose";
+
+
 //VIEWS
 import Home from "./views/Home";
 import About from "./views/About";
@@ -15,32 +16,35 @@ import AdminLogin from "./views/AdminLogin";
 
 
 //COMPONENTS
-import Navbar from "./components/Navbar";
-import ProductsNavbar from "./components/ProductsNavbar";
+import Navbar from "./components/Navbar"
+import ProductsNavbar from "./components/ProductsNavbar"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import AdminPage from "./views/AdminPage";
+import AdminPage from "./views/AdminPage"
 import Newsletter from "./components/Newsletter"
 
 
 function App() {
+
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [admin, setAdmin] = useState(JSON.parse(localStorage.getItem("admin")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
 
     //VERIFY TOKEN
     useEffect(() => {
       const verify_token = async () => {
         try {
+
           if (!token) {
             setIsLoggedIn(false);
           } else {
             axios.defaults.headers.common["Authorization"] = token;
             const response = await axios.post(
-              `http://localhost:4004/admin/loginAdmin`
+              `http://localhost:4004/admin/verify_token`
             );
-            console.log(response);
-            return response.data.ok ? login(response.data.token) : logout();
+
+            return response.data.ok ? login(token) : logout();
+
           }
         } catch (error) {
           console.log(error);
@@ -49,19 +53,25 @@ function App() {
       verify_token();
     }, [token]);
 
-    const login = (token) => {
-      debugger
+
+    // LOGIN FUNCTION - MAKE IT REUSABLE FOR USERS TOO
+    const login = (token, user) => {
+
       let decodedToken = jose.decodeJwt(token);
 
-      let admin = {
-        emailAddress: decodedToken.emailAddress,
-      };
+      // let admin = {
+      //   emailAddress: decodedToken.emailAddress,
+      //   name:  'yyyy'
+      // };
       localStorage.setItem("token", JSON.stringify(token));
-      localStorage.setItem("user", JSON.stringify(admin));
+      // MAKE SURE TO STORE USER IN LOCALSTORAGE
+      localStorage.setItem("user", JSON.stringify(user));
+
+
       setIsLoggedIn(true);
     };
 
-    //LOGOUT
+  //LOGOUT
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -71,7 +81,7 @@ function App() {
   return (
     <div className="bodyWrapper">
 
-      {/* only one router can be implemented per project */}
+
       <Router>
 
         <Navbar />
@@ -83,19 +93,24 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
-          <Route path="/User/Register" element={<RegisterUser />} />
+          <Route path="/User/Register" element={!isLoggedIn ?<RegisterUser /> : <Navigate to='/'/>} />
+
+          {/* <Route path="/User/Login" element={!isLoggedIn ? <UserLogin /> : <Navigate to="/"/>} />*/}
+
+
           <Route path="/User/Login" element={<UserLogin />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/admin/loginAdmin" element={<AdminLogin isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} login={login} />} />
+          <Route path="/admin/login" element={!isLoggedIn ? <AdminLogin isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} login={login} /> : <Navigate to='/'/>} />
           <Route path="/Contact" element={<Contact />} />
-
-          {/* if logged in, show adminPage */}
-          {/* <Route path="/admin/adminPage" element={isLoggedIn && isAdmin ?<AdminPage /> : <Navigate to='/'/>} /> */}
+          <Route path="/admin/adminPage" element={isLoggedIn ? <AdminPage /> : <NavLink to="/" />} />
 
         </Routes>
         <Newsletter />
         <Footer />
+
       </Router>
+
+
     </div>
   );
 }

@@ -8,8 +8,8 @@ const UserSchema = new Schema(
       emailAddress: { type: String, required: true, unique: true },
       password: { type: String, required: true },
       address: { type: String, required: false },
-      birth: {type: Number, required: true},
-      newsletter: {type: Boolean, required: false}
+      birthDate: {type: Number, required: true},
+
 
 
     }

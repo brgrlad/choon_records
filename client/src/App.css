@@ -1,3 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+}
+
 body{
     width: 100vw;
    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -5,7 +13,7 @@ body{
 }
 
 .bodyWrapper{
-    width: 90%;
+    max-width: 90%;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -18,6 +26,8 @@ body{
 a{
     margin: 5px 10px;
 }
+
+
 
 .navbar{
 
@@ -45,14 +55,14 @@ img{
     ;
 }
 
-h3{
-    line-height: 5px;
-}
+
 
 .productsWrapper{
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 5px solid red;
 
 
 
@@ -68,7 +78,9 @@ h3{
     background-color: rgba(0, 0, 0, 0.888);
     color: white;
 
+
 }
+
 
 .loginAdmin{
 

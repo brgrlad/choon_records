@@ -9,6 +9,7 @@ function AdminPage() {
     label: "",
     price: "",
     genres: "",
+    picture: "",
     instock: true,
   });
 
@@ -101,6 +102,14 @@ function AdminPage() {
           onChange={handleChange}
           placeholder="genres"
           value={product.genres}
+        />
+
+        <input
+          id="picture"
+          type="string"
+          onChange={handleChange}
+          placeholder="picture"
+          value={product.picture}
         />
 
         {/* INSTOCK INPUT */}

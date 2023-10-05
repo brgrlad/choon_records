@@ -1,15 +1,16 @@
 const User = require("../models/User");
 
 const argon2 = require("argon2");
+require('dotenv').config();
 
 const jwt = require("jsonwebtoken");
-const jwt_secret = "abc";
+const jwt_secret = process.env.JWT_SECRET
 
 class UserController {
+
     //FIND USER
     async findOne(req, res) {
       let { _id } = req.body;
-
       try {
         const user = await User.findOne({ _id: _id });
         res.send({ ok: true, data: user });
@@ -39,9 +40,7 @@ class UserController {
 
     try {
 
-
       const findUser = await User.findOne({ emailAddress });
-
 
       if(findUser) {
        res.send({
@@ -59,8 +58,6 @@ class UserController {
       res.send(error);
     }
   }
-
-
 
 
   //LOGIN USER

@@ -20,7 +20,7 @@ function UserLogin({login}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let userInput = { emailAddress: emailInput, password: passwordInput };
+    let userInput = { emailAddress: emailInput, password: passwordInput};
 
 
     const URL = "http://localhost:4004/user/login";

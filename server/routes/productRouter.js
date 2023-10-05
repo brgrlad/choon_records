@@ -6,11 +6,13 @@ const productController = require('../controllers/productController')
 
 
 //HOME
-router.get('/', (req, res) => {
-    res.send('hello from home!')
-});
+// router.get('/', (req, res) => {
+//     res.send('hello from home!')
+// });
 
-//PRODUCTS
+
+
+
 
 //works fine
 router.get('/getOneProduct', productController.findOne)
@@ -28,5 +30,10 @@ router.delete('/deleteProduct', productController.findOneAndDelete)
 
 // works fine
 router.post('/createProduct', productController.createProduct)
+
+//PRODUCTS
+router.get('/:productDetails', (req, res) => {
+    res.send('product detail page')
+})
 
 module.exports = router;

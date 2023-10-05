@@ -9,8 +9,9 @@ const ProductSchema = new Schema(
     label: {type: String, required: true},
     price: {type: Number, required: true},
     genres: {type: String, required: true},
-    instock: {type: Boolean, required: true}
-    // picture: {type: String, required: true},
+    picture: {type: String, required: false},
+    instock: {type: Boolean, required: true},
+
     // audio: {type: String, required: true}
 
   }

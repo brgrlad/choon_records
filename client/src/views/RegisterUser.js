@@ -20,7 +20,7 @@ function RegisterUser() {
 
   //SUBMIT HANDLER/API CALL
   const handleSubmit = async (e) => {
-    console.log('handle submit')
+
 
     e.preventDefault()
 

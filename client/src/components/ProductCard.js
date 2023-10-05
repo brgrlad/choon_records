@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function ProductCard({element}) {
 
@@ -6,15 +8,26 @@ function ProductCard({element}) {
 
   const clickHandler = (e) => {
     e.preventDefault()
-    console.log(elementID)
+    console.log('ckicked')
 
+
+    //API CALL?
   }
 
-  //make API call?
+
+
+  const navigate = useNavigate()
 
   return (
 
-    <div className="productCard" onClick={clickHandler}>
+
+    <div className="productCard"
+      onClick={(e) => {
+          clickHandler(e);
+          // redirect to product page?
+
+
+        }} >
 
         <img src={element.picture}></img>
 
@@ -25,7 +38,7 @@ function ProductCard({element}) {
         <p>{element.genres}</p>
 
         <p>{element.price}</p>
-        <button>Buy</button>
+        <button >Buy</button>
 
     </div>
 

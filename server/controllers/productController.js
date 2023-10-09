@@ -5,13 +5,15 @@ class ProductController {
 
   //FIND A SINGLE USER
   async findOne(req, res) {
-    let { _id } = req.body;
+
+    let { _id } = req.params;
 
     try {
       const product = await Product.findOne({ _id: _id });
       res.send({ok: true, data: product});
     } catch (error) {
-      res.send(error);
+      console.log(error)
+      res.send({ok: false, error});
     }
   }
 

@@ -27,7 +27,7 @@ async function connecting() {
 
 connecting()
 
-app.use('/product', productRouter)
+app.use('/products', productRouter)
 app.use('/admin', adminRouter)
 app.use('/user', userRouter)
 

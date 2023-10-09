@@ -4,9 +4,9 @@ function Header() {
 
       <header>
 
-      <h1> CHOON RECORDS!</h1>
-      <p>Second HandVinyl</p>
-      <p>From DJs, for DJs!</p>
+      <h1> choon records</h1>
+      <p>second-hand vinyl</p>
+      <p> from DJs, for DJs!</p>
 
       </header>
     );

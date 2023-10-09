@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import * as jose from "jose";
+
+
 
 //VIEWS
 import Home from "./views/Home";
@@ -19,24 +20,32 @@ import Products from "./views/Products";
 import Contact from "./views/Contact";
 import AdminLogin from "./views/AdminLogin";
 import ProductDetail from "./views/ProductDetail";
+import Cart from "./views/Cart";
+import AdminPage from "./views/AdminPage";
 
 //COMPONENTS
 import Navbar from "./components/Navbar";
 import ProductsNavbar from "./components/ProductsNavbar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import AdminPage from "./views/AdminPage";
 import Newsletter from "./components/Newsletter";
+import CheckoutProduct from "./components/CheckoutProduct";
 
 function App() {
 
+  //STATES
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-
-  //admin
   const [isAdmin, setIsAdmin] = useState(null);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cartLocalStorage")) || []);
+  const [cartTotal, setCartTotal] = useState(0);
 
+
+
+
+
+  //VERIFY TOKEN AND LOGIN
   useEffect(() => {
 
     const verify_token = async () => {
@@ -54,25 +63,22 @@ function App() {
         console.log(error);
       }
     };
+
     verify_token();
+
+
   }, [token]);
+
+
+
+
+
 
   // LOGIN FUNCTION
   const login = (token, user) => {
-
-    // let decodedToken = jose.decodeJwt(token);
-
-    // let admin = {
-    //   emailAddress: decodedToken.emailAddress,
-    //   name:  'yyyy'
-    // };
-
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("user", JSON.stringify(user));
-
-
     setIsLoggedIn(true);
-
   };
 
   //LOGOUT
@@ -85,27 +91,56 @@ function App() {
   return (
     <div className="bodyWrapper">
       <Router>
-        <Navbar isLoggedIn={isLoggedIn}/>
+        <Navbar isLoggedIn={isLoggedIn} />
 
         <Header />
 
         <ProductsNavbar />
 
         <Routes>
+          {/* HOME */}
+          <Route path="/home" element={<Home />} />
 
-          <Route path="/" element={<Home />} />
-          <Route path="/About" element={<About />} />
+          {/* Cart */}
+
           <Route
-            path="/User/Register"
-            element={!isLoggedIn ? <RegisterUser /> : <Navigate to="/" />}
+            path="/Cart"
+            element={
+              <Cart
+                cart={cart}
+                CheckoutProduct={CheckoutProduct}
+                cartTotal={cartTotal}
+                setCartTotal={setCartTotal}
+                setCart={setCart}
+              />
+            }
           />
 
-          <Route path="/products" element={<Products />} />
+          {/* ABOUT */}
+          <Route path="/About" element={<About />} />
 
+          {/* REGISTER */}
+          <Route
+            path="/User/Register"
+            element={!isLoggedIn ? <RegisterUser /> : <Navigate to="/home" />}
+          />
+
+          {/* PRODUCTS */}
+          <Route
+            path="/products"
+            element={
+              <Products
+                setCart={setCart}
+                cart={cart}
+
+              />
+            }
+          />
+
+          {/* SINGLE PRODUCT PAGE */}
           <Route path="/products/:ProductDetails" element={<ProductDetail />} />
 
-
-
+          {/* USER LOGIN */}
           <Route
             path="/User/Login"
             element={
@@ -116,32 +151,43 @@ function App() {
                   login={login}
                 />
               ) : (
-                <Navigate to="/" />
+                <Navigate to="/home" />
               )
             }
           />
 
+          {/* ADMIN LOGIN */}
           <Route
             path="/admin/login"
             element={
-              !isLoggedIn  ? (
+              !isLoggedIn ? (
                 <AdminLogin
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
                   login={login}
                 />
               ) : (
-                <Navigate to="/" />
+                <Navigate to="/home" />
               )
             }
           />
 
+          {/* CONTACT */}
           <Route path="/Contact" element={<Contact />} />
+
+          {/* ADMIN PAGE */}
           <Route
             path="/admin/adminPage"
-            element={isLoggedIn && user.isAdmin ? <AdminPage /> : <NavLink to="/" />}
+            element={
+              isLoggedIn && user.isAdmin ? (
+                <AdminPage />
+              ) : (
+                <NavLink to="/home" />
+              )
+            }
           />
         </Routes>
+
         <Newsletter />
         <Footer />
       </Router>

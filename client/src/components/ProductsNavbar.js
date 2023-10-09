@@ -5,10 +5,10 @@ function ProductsNavbar() {
   return (
     <nav className="productsNavbar">
 
-        <Link to="/products">FRESH IN! |</Link>
-        <Link to="/products/Techno">TECHNO |</Link>
-        <Link to="/products/House">HOUSE |</Link>
-        <Link to="/products/Minimal">MINIMAL</Link>
+        <Link to="/products">fresh in / </Link>
+        <Link to="/products/Techno">techno /</Link>
+        <Link to="/products/House">house  /</Link>
+        <Link to="/products/Minimal">minimal </Link>
     </nav>
   );
 }

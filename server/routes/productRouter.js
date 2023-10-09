@@ -15,7 +15,7 @@ const productController = require('../controllers/productController')
 
 
 //works fine
-router.get('/getOneProduct', productController.findOne)
+router.get('/getOneProduct/:_id', productController.findOne)
 
 //works fine
 router.get('/getAllProducts', productController.findAll)

@@ -20,7 +20,7 @@ function AdminPage() {
 
   //API CALL TO ADD A NEW PRODUCT
   const addProduct = async () => {
-    const URL = "http://localhost:4004/product/createProduct";
+    const URL = "http://localhost:4004/products/createProduct";
     try {
       const response = await axios.post(URL, product);
       let data = response.data;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import {URL} from '../config'
 
 function ProductDetail({ cart, setCart }) {
 
@@ -19,7 +20,7 @@ function ProductDetail({ cart, setCart }) {
   const fetchProduct = async () => {
     try {
       let product = await axios.get(
-        `http://localhost:4004/products/getOneProduct/${_id}`
+        `${URL}/products/getOneProduct/${_id}`
       );
       setProductObj(product.data.data);
     } catch (error) {

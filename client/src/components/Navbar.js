@@ -10,7 +10,7 @@ function Navbar({ isLoggedIn }) {
 
       <div className="homeLink">
 
-      <Link to="/"> home</Link>
+      <Link to="/home"> home</Link>
       </div>
 
       <div className="navRightSide">

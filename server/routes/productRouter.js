@@ -5,11 +5,6 @@ const productController = require('../controllers/productController')
 
 
 
-//HOME
-// router.get('/', (req, res) => {
-//     res.send('hello from home!')
-// });
-
 
 
 

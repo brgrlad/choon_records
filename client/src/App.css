@@ -80,17 +80,15 @@ header{
 
 
 
-footer{
-    height: 200px;
-    background-color: black;
-    color: white;
-    width: 100%;
-}
+
+
 
 img{
     width: 100%;
-    ;
+
 }
+
+
 
 
 
@@ -205,12 +203,25 @@ img{
 }
 
 .emailNewsletter{
-    width: 300px;
-    height: 30px;
-    border-radius: 100px;
-    border: none;
-    margin-right: 20px;
+    width: 800px;
+    height: 50px;
+    color: rgba(255, 255, 255, 0.756);
+
+
+
+    background-color: rgba(0, 0, 0, 0.723);
+     border-radius: 5px;
+
+    font-size: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.855);
+
 }
+
+input:focus{
+    outline:none!important;
+}
+
+
 
 .subscribe{
     height: 30px;
@@ -270,28 +281,38 @@ img{
     width: 100%;
     background-color: black;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     text-align: center;
     height: 350px;
     background: url("./images/newsletter_background.jpg");
+    line-height: 30px;
+}
+
+.newsletterWrapper img{
+    z-index: -1;
 }
 .newsletter{
 
     color: white;
+    width: 70%;
 
-    width: 40%;
+
 
 }
-.newsletterForm{
-    width: 50%;
+#newsletterForm{
+
+    display: flex;
+    flex-direction: column;
+
 }
 .cartWrapper {
     width: 80%;
-
     display: flex;
-    margin: 5px;
+    margin: 25px 0;
     border-bottom: 1px dashed rgba(0, 0, 0, 0.236);
+    font-size: 16px;
 
 
 }
@@ -341,20 +362,39 @@ img{
 
 }
 
-#buyButton{
+.buyButton{
     width: 50px;
-    height: 20px;
+    height: 30px;
     border: none;
     background-color: rgb(4, 157, 63);
     color: white;
-    border-radius: 5px;
+    box-shadow: 10px 12px 0px 5px #000000;
     margin-top: 10px;
-    box-shadow: 6px 5px 0px 0px rgb(0, 0, 0);
+
+
+
+
+
 
 
 }
 
-#buyButton:hover{
+.buyNow{
+    font-size: 16px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+}
+
+.grayBg{
+    background-color: green;
+}
+
+.buyButton:hover{
     background-color: rgb(0, 0, 0);
     cursor: pointer;
     box-shadow: 6px 5px 0px 0px rgb(4, 157, 63);
@@ -376,6 +416,29 @@ a:visited{
 
 
     text-align: right;
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    align-items: center;
 
+
+
+}
+
+footer{
+
+    background-color: black;
+    color: white;
+    width: 100%;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 25px 0;
+}
+.socialMedia, .conditions, .aboutUsFooter{
+    width: 20%;
+
+    text-align: left;
+    line-height: 25px;
 
 }

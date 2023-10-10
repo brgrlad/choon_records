@@ -36,8 +36,10 @@ function App() {
   //STATES
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [isAdmin, setIsAdmin] = useState(null);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || '');
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
+
+
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cartLocalStorage")) || []);
   const [cartTotal, setCartTotal] = useState(0);
 
@@ -93,11 +95,22 @@ function App() {
       <Router>
         <Navbar isLoggedIn={isLoggedIn} />
 
+
+
         <Header />
 
         <ProductsNavbar />
 
         <Routes>
+
+        <Route
+            path="/"
+            element={<Navigate to="/home" />}
+          />
+
+
+
+
           {/* HOME */}
           <Route path="/home" element={<Home />} />
 
@@ -128,17 +141,14 @@ function App() {
           {/* PRODUCTS */}
           <Route
             path="/products"
-            element={
-              <Products
-                setCart={setCart}
-                cart={cart}
-
-              />
-            }
+            element={<Products setCart={setCart} cart={cart} />}
           />
 
           {/* SINGLE PRODUCT PAGE */}
-          <Route path="/products/:ProductDetails" element={<ProductDetail />} />
+          <Route
+            path="/products/:ProductDetails"
+            element={<ProductDetail cart={cart} setCart={setCart} />}
+          />
 
           {/* USER LOGIN */}
           <Route

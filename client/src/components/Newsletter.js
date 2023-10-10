@@ -1,6 +1,7 @@
 function Newsletter() {
   return (
     <div className="newsletterWrapper">
+
       <div className="newsletter">
 
         <h2> Subscribe to our newsletter!</h2>

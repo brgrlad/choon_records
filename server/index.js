@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path');
+
 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +33,14 @@ app.use('/products', productRouter)
 app.use('/admin', adminRouter)
 app.use('/user', userRouter)
 
+
+//serve buld folder to front-end
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 app.listen(4004, () => {
   console.log("connected to port 4004");

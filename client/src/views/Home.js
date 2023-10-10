@@ -8,9 +8,7 @@ function Home() {
 
     <div className="homeWrapper">
 
-    <h1> JUST IN! \/ </h1>
-
-    <Products />
+     <Products />
 
     </div>
 

@@ -7,7 +7,7 @@ function ProductCard({element, setCart, cart}) {
 
   const clickHandler = async() => {
 
-    console.log()
+
     navigate(`/products/${element._id}`)
 
   }
@@ -18,9 +18,6 @@ function ProductCard({element, setCart, cart}) {
     let newArr = [...cart, element]
     setCart(newArr)
     localStorage.setItem("cartLocalStorage", JSON.stringify(newArr))
-
-
-
 
   }
 
@@ -46,7 +43,7 @@ function ProductCard({element, setCart, cart}) {
       <p>{element.genres}</p>
 
       <div className="buyWrapper">
-        <button onClick={buyButtonHandler} id="buyButton">€{element.price}</button>
+        <button onClick={buyButtonHandler} className="buyButton">€{element.price}</button>
 
       </div>
     </div>

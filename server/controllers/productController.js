@@ -56,7 +56,7 @@ console.log(updatedProduct);
 
   //CREATE NEW PRODUCT
   async createProduct(req, res) {
-    let { artist, title, releaseDate, label, price, genres, instock } = req.body;
+    let { artist, title, releaseDate, label, price, genres, picture, instock } = req.body;
 
     let newProduct = {
         artist,
@@ -65,7 +65,8 @@ console.log(updatedProduct);
         label,
         price,
         genres,
-        instock
+        picture,
+        instock: true
 
     }
 

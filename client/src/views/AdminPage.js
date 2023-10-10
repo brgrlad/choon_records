@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function AdminPage() {
+
   const [product, setProduct] = useState({
+
+
     artist: "",
     title: "",
     releaseDate: "",
@@ -22,6 +25,7 @@ function AdminPage() {
   const addProduct = async () => {
     const URL = "http://localhost:4004/products/createProduct";
     try {
+
       const response = await axios.post(URL, product);
       let data = response.data;
       return data

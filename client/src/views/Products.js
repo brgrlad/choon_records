@@ -12,9 +12,9 @@ function Products({setCart, cart}) {
 
   //API CALL TO GET PRODUCTS
   const getProducts = async () => {
-    const URL = `${URL}/products/getAllProducts`;
+    const path = `${URL}/products/getAllProducts`;
     try {
-      const response = await axios.get(URL);
+      const response = await axios.get(path);
 
       let products = response.data;
 

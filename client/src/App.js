@@ -53,7 +53,7 @@ function App() {
 
     const verify_token = async () => {
       try {
-        console.log(URL);
+
         if (!token) {
           setIsLoggedIn(false);
         } else {

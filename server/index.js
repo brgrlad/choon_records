@@ -27,7 +27,7 @@ async function connecting() {
 
 }
 
-connecting()
+
 
 app.use('/products', productRouter)
 app.use('/admin', adminRouter)
@@ -42,8 +42,11 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-app.listen(4004, () => {
-  console.log("connected to port 4004");
-});
+connecting().then(() => {
+    app.listen(4004, () => {
+        console.log("conected to 4004");
+    })
+})
+
 
 

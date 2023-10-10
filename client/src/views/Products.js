@@ -12,6 +12,8 @@ function Products({setCart, cart}) {
   const getProducts = async () => {
     const path = `${URL}/products/getAllProducts`;
     try {
+
+      console.log(path)
       const response = await axios.get(path);
 
       let products = response.data;

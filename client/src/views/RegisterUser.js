@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {URL} from '../config'
 
 function RegisterUser() {
 
@@ -10,6 +11,7 @@ function RegisterUser() {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [birthDate, setBirthDate] = useState("")
+
 
   //INPUT HANDLERS
   const handleInput = (e, inputState) => {
@@ -37,10 +39,10 @@ function RegisterUser() {
     console.log(newUser)
 
 
-    const URL = "http://localhost:4004/user/register";
+    const path = `${URL}/user/register`;
 
     try {
-      const response = await axios.post(URL, newUser)
+      const response = await axios.post(path, newUser)
       console.log(response)
 
     } catch (error) {

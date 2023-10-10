@@ -22,6 +22,7 @@ import AdminLogin from "./views/AdminLogin";
 import ProductDetail from "./views/ProductDetail";
 import Cart from "./views/Cart";
 import AdminPage from "./views/AdminPage";
+import {URL} from '../config'
 
 //COMPONENTS
 import Navbar from "./components/Navbar";
@@ -57,7 +58,7 @@ function App() {
         } else {
             axios.defaults.headers.common["Authorization"] = token;
             const response = await axios.post(
-              `http://localhost:4004/admin/verify_token`
+              `${URL}/admin/verify_token`
             );
             return response.data.ok ? login(token, user) : logout;
         }

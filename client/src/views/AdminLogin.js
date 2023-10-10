@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as jose from "jose";
 import { useNavigate } from "react-router-dom";
-
+import {URL} from '../config'
 // login() is being passed via Route
 function AdminLogin({ login }) {
 
@@ -24,10 +24,10 @@ function AdminLogin({ login }) {
 
     let adminInput = { emailAddress: emailInput, password: passwordInput };
 
-    const URL = "http://localhost:4004/admin/login";
+    const path = `${URL}/admin/login`;
 
     try {
-      const response = await axios.post(URL, adminInput);
+      const response = await axios.post(path, adminInput);
       console.log(response);
 
       if (response.data.token) {

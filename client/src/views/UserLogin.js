@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as jose from "jose";
 import { useNavigate } from "react-router-dom";
+import {URL} from '../config'
 
 function UserLogin({login}) {
 
@@ -23,10 +24,10 @@ function UserLogin({login}) {
     let userInput = { emailAddress: emailInput, password: passwordInput};
 
 
-    const URL = "http://localhost:4004/user/login";
+    const path = `${URL}/user/login`;
 
     try {
-      const response = await axios.post(URL, userInput);
+      const response = await axios.post(path, userInput);
 
       if (response.data.token) {
 

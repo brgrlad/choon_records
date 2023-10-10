@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {URL} from '../config'
 
 function AdminPage() {
 
@@ -23,10 +24,10 @@ function AdminPage() {
 
   //API CALL TO ADD A NEW PRODUCT
   const addProduct = async () => {
-    const URL = "http://localhost:4004/products/createProduct";
+    const path = `${path}products/createProduct`;
     try {
 
-      const response = await axios.post(URL, product);
+      const response = await axios.post(path, product);
       let data = response.data;
       return data
     } catch (error) {

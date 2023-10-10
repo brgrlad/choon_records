@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
+import {URL} from '../config'
 
 
 
@@ -11,7 +12,7 @@ function Products({setCart, cart}) {
 
   //API CALL TO GET PRODUCTS
   const getProducts = async () => {
-    const URL = "http://localhost:4004/products/getAllProducts";
+    const URL = `${URL}/products/getAllProducts`;
     try {
       const response = await axios.get(URL);
 

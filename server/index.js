@@ -1,9 +1,9 @@
-require('dotenv').config()
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path');
+(require('dotenv').config())
 
 
 app.use(cors())
@@ -18,8 +18,9 @@ const userRouter =  require("./routes/userRouter")
 
 async function connecting() {
     try{
+        console.log(process.env.MONGO_URI);
         // await mongoose.connect('mongodb://127.0.0.1/newdatabase')
-        await mongoose.connect(process.env.DB_KEY)
+        await mongoose.connect(process.env.MONGO_URI)
         console.log('connected do DB')
     } catch (error) {
         console.log(error)

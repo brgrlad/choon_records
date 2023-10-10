@@ -22,7 +22,7 @@ import AdminLogin from "./views/AdminLogin";
 import ProductDetail from "./views/ProductDetail";
 import Cart from "./views/Cart";
 import AdminPage from "./views/AdminPage";
-import {URL} from '../config'
+import {URL} from './config'
 
 //COMPONENTS
 import Navbar from "./components/Navbar";
@@ -53,6 +53,7 @@ function App() {
 
     const verify_token = async () => {
       try {
+        console.log(URL);
         if (!token) {
           setIsLoggedIn(false);
         } else {

@@ -33,7 +33,7 @@ function Products({setCart, cart}) {
     <div className="productsWrapper">
 
 
-      {productsArr.map((element) => (
+      {productsArr && productsArr.length >0 &&productsArr.map((element) => (
         <ProductCard element={element} setCart={setCart} cart={cart}  />
       ))}
     </div>

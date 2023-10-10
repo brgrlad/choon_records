@@ -3,8 +3,6 @@ import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import {URL} from '../config'
 
-
-
 function Products({setCart, cart}) {
 
 

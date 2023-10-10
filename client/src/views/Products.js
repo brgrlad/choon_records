@@ -33,7 +33,7 @@ function Products({setCart, cart}) {
   return (
     <div className="productsWrapper">
 
-<h1>PATH</h1>
+<h1>{URL}</h1>
       {productsArr && productsArr.length >0 &&productsArr.map((element) => (
         <ProductCard element={element} setCart={setCart} cart={cart}  />
       ))}
